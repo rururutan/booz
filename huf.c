@@ -27,10 +27,7 @@ static uchar c_len[NC], pt_len[NPT];
 static uint  blocksize;
 static ushort c_table[4096], pt_table[256];
 
-static int read_pt_len(nn, nbit, i_special)
-int nn;
-int nbit;
-int i_special;
+static int read_pt_len(int nn, int nbit, int i_special)
 {
    int i, c, n;
    uint mask;

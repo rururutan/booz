@@ -19,8 +19,7 @@ to_long() converts four consecutive bytes, in order of increasing
 significance, to a long integer.  It is used to make Zoo independent of the
 byte order of the system.  
 */
-long to_long(data)
-BYTE data[];
+long to_long(BYTE data[])
 {
    long retval;
    retval = ((unsigned) data[2] & 0xff) | 
@@ -35,8 +34,7 @@ BYTE data[];
 to_int() converts two consecutive bytes, in order of increasing
 significance, to an integer, in a machine-independent manner
 */
-int to_int(data)
-BYTE data[];
+int to_int(BYTE data[])
 {
    return (int) (((unsigned) data[0] & 0xff) | 
       ((unsigned) (data[1] & 0xff) << 8));
@@ -46,9 +44,7 @@ BYTE data[];
 Function rd_zooh() reads a Zoo archive header in a machine-dependent manner,
 from an open file.
 */
-int rd_zooh (header, zoofile)
-struct zoo_header *header;
-FILE *zoofile;
+int rd_zooh (struct zoo_header *header, FILE *zoofile)
 {
    int status;
    BYTE bytes[SIZ_ZOOH];
@@ -61,9 +57,7 @@ FILE *zoofile;
 Function rd_dir() reads a directory entry in a machine-independent manner
 from an open file.
 */
-int rd_dir(direntry, zoofile)
-struct direntry *direntry;
-FILE *zoofile;
+int rd_dir(struct direntry *direntry, FILE *zoofile)
 {
    int status;
    BYTE bytes[SIZ_DIR];
@@ -75,9 +69,7 @@ FILE *zoofile;
 /***********************
 b_to_zooh() converts an array of BYTE to a zoo_header structure.
 */
-int b_to_zooh (zoo_header, bytes)
-struct zoo_header *zoo_header;
-BYTE bytes[];
+int b_to_zooh (struct zoo_header *zoo_header, BYTE bytes[])
 {
    int i;
    for (i = 0; i < SIZ_TEXT; i++)
@@ -92,9 +84,7 @@ BYTE bytes[];
 }
 
 /* b_to_dir() converts bytes to directory entry structure */
-int b_to_dir(direntry, bytes)
-struct direntry *direntry;
-BYTE bytes[];
+int b_to_dir(struct direntry *direntry, BYTE bytes[])
 {
    int i;
    direntry->lo_tag = to_int(&bytes[DTAG_I]);

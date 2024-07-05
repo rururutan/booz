@@ -24,9 +24,7 @@ int decode_start()
 /* decodes up to 'count' chars (but no more than DICSIZ) into supplied
 buffer; returns actual count.  */
 
-int decode(count, buffer)
-uint count;
-uchar buffer[];
+int decode(uint count, uchar buffer[])
 {
    static uint i;
    uint r, c;
@@ -69,9 +67,7 @@ Should return error status or byte count, but currently
 returns 0.
 */
 
-int lzh_decode(infile, outfile)
-FILE *infile;
-FILE *outfile;
+int lzh_decode(FILE *infile, FILE *outfile)
 {
    int n;
    extern int decoded;

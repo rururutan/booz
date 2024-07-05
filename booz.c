@@ -9,10 +9,10 @@ This file is public domain.
 #include "booz.h"
 #include "zoo.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-main(argc,argv)
-register int argc;
-register char **argv;
+int main(int argc, char **argv)
 {
    char *p;
    static char usage[]=
@@ -47,8 +47,7 @@ register char **argv;
 This function prints a string to standard output without using
 printf(). If a null string, nothing is printed.  */
 
-int putstr (str)
-register char *str;
+void putstr (char *str)
 {
    register int count;
    if (str == NULL)
@@ -69,10 +68,7 @@ of the error and the result.
    'f'   fatal error -- program exits
 */
 
-int prterror (level, a, b, c)
-int level;
-char *a, *b, *c;
-
+int prterror (int level, char *a, char *b, char *c)
 {
 
 #ifdef DEBUG
@@ -110,10 +106,7 @@ The global variable 'crccode' is updated.
 */
 extern char out_buf_adr[];
 
-int getfile(infile, outfile, count)
-FILE *infile;
-FILE *outfile;
-long count;
+int getfile(FILE *infile, FILE *outfile, long count)
 {
    register int how_much;
 
@@ -133,10 +126,7 @@ long count;
    return (0);
 }
 
-int needed (fname, argc, argv)
-char *fname;
-int argc;
-char *argv[];
+int needed (char *fname, int argc, char *argv[])
 {
    register int i;
    if (argc == 0)
@@ -161,8 +151,7 @@ Computing Activities.  Taken from the source code for C-Kermit version
 4C.
 */
 
-int match (string, pattern) 
-register char *string, *pattern;
+int match (char *string, char *pattern) 
 {
    char *psave,*ssave;        /* back up pointers for failure */
    psave = ssave = ((char *) 0);
@@ -191,8 +180,7 @@ int memerr()
 }
 
 /* cfactor() calculates the compression factor given a directory entry */
-int cfactor (org_size, size_now)
-long org_size, size_now;
+int cfactor (long org_size, long size_now)
 {
    register int size_factor;
 
@@ -214,18 +202,18 @@ long org_size, size_now;
 }
 
 /******
-Function itoa() converts a positive long integer into a text string of
+Function itoan() converts a positive long integer into a text string of
 digits.  The buffer pointer buf must point to a buffer to receive the
 digit string.  The digit string is stored right justified in the
 buffer with leading blanks.  If the supplied number is negative, or if
 overflow occurs, a single '*' is returned.
 */
 
-char *itoa (pad_ch, n, buf, buflen)
-char pad_ch;                  /* leading pad character */
-long n;                       /* positive long int to convert */
-char *buf;                    /* buffer to receive digit string */
-int buflen;                   /* length of buffer */
+char *itoan (char pad_ch, long n, char *buf, int buflen)
+//char pad_ch;                  /* leading pad character */
+//long n;                       /* positive long int to convert */
+//char *buf;                    /* buffer to receive digit string */
+//int buflen;                   /* length of buffer */
 {
    char *p;
    int i;

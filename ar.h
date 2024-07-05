@@ -6,11 +6,6 @@
 
 #include <stdio.h>
 
-typedef unsigned char uchar;	/* 8 bits or more */
-typedef unsigned int   uint;    /* 16 bits or more */
-typedef unsigned short ushort;  /* 16 bits or more */
-typedef unsigned long  ulong;   /* 32 bits or more */
-
 /* T_UINT16 must be #defined in options.h to be 
 a 16-bit unsigned integer type */
 

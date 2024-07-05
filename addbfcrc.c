@@ -15,10 +15,7 @@ This file is public domain.
 unsigned int crccode;
 unsigned int crctab[TABLEN];
 
-int addbfcrc(buffer,count)
-char *buffer;
-unsigned count;
-
+int addbfcrc(char *buffer, unsigned count)
 {
    register unsigned int localcrc;
    register int i;
@@ -37,8 +34,7 @@ unsigned count;
 
 unsigned int calcterm();
 
-unsigned int calcterm (data)
-register unsigned int data;
+unsigned int calcterm (register unsigned int data)
 {
    int i;
    register unsigned int accum = 0;

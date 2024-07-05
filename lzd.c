@@ -9,6 +9,7 @@ This file is public domain.
 
 #include "booz.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 /* must fit in MEM_BLOCK_SIZE */
 #define  OUT_BUF_SIZE    4096
@@ -45,8 +46,7 @@ static int ad_dcode();
 static unsigned lzd_sp = 0;
 static unsigned lzd_stack[STACKSIZE + SPARE];
 
-static int push(ch)
-int ch;
+static int push(int ch)
 {
    lzd_stack[lzd_sp++] = ch;
    if (lzd_sp >= STACKSIZE)
@@ -72,8 +72,7 @@ unsigned output_offset;
 static FILE *in_file;
 static FILE *out_file; 
 
-int lzd(input_file, output_file)
-FILE *input_file, *output_file;          /* input & output file handles */
+int lzd(FILE *input_file, FILE *output_file) /* input & output file handles */
 {
    in_file = input_file;                 /* make it avail to other fns */
    out_file = output_file;               /* ditto */
@@ -194,8 +193,7 @@ static int init_dtab()
    free_code = FIRST_FREE;
 }
 
-static int wr_dchar (ch)
-int ch;
+static int wr_dchar (int ch)
 {
    if (output_offset >= OUTBUFSIZ) {      /* if buffer full */
       if (out_file != NULL) {

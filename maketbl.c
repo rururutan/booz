@@ -10,11 +10,7 @@ Adapted from "ar" archiver written by Haruhiko Okumura.
 #include "ar.h"
 #include "lzh.h"
 
-int make_table(nchar, bitlen, tablebits, table)
-int nchar;
-uchar bitlen[];
-int tablebits;
-ushort table[];
+int make_table(int nchar, uchar bitlen[], int tablebits, ushort table[])
 {
 	ushort count[17], weight[17], start[18], *p;
 	uint i, k, len, ch, jutbits, avail, nextcode, mask;

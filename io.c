@@ -16,8 +16,7 @@ t_uint16 bitbuf;
 static uint  subbitbuf;
 static int   bitcount;
 
-int fillbuf(n)  /* Shift bitbuf n bits left, read n bits */
-int n;
+int fillbuf(int n)  /* Shift bitbuf n bits left, read n bits */
 {
 	bitbuf <<= n;
 	while (n > bitcount) {
@@ -31,8 +30,7 @@ int n;
 	bitbuf |= subbitbuf >> (bitcount -= n);
 }
 
-uint getbits(n)
-int n;
+uint getbits(int n)
 {
 	uint x;
 
@@ -40,10 +38,7 @@ int n;
 	return x;
 }
 
-int fwrite_crc(p, n, f)
-uchar *p;
-int n;
-FILE *f;
+int fwrite_crc(uchar *p, int n, FILE *f)
 {
 	if (f != NULL) {
 		if (fwrite((char *) p, 1, n, f) < n) 

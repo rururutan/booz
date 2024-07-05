@@ -14,23 +14,20 @@ only if the symbol FIXFNAME is defined.
 #include "booz.h"
 #include "zoo.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 extern unsigned int crccode;
 
 int needed ();
 
-int oozext (zoo_path, option, argc, argv)
-char *zoo_path;
-char *option;
-int argc;
-char *argv[];
-
+int oozext (char *zoo_path, char *option, int argc, char *argv[])
 {
 FILE *zoofile;                            /* open archive */
 FILE *this_file;                          /* file to extract */
 long next_ptr;                            /* pointer to within archive */
 struct zoo_header zoo_header;             /* header for archive */
-int status;                               /* error status */
+int status = 0;                           /* error status */
 struct direntry direntry;                 /* directory entry */
 int all = 0;                              /* overwrite all? */
 static char vermsg[] = "A higher version of Ooz is needed to extract ";
@@ -101,25 +98,25 @@ while (1) {
          putstr ("--------  --- --------  --------- --------\n");
          first_time = 0;
       }
-      strcpy (outstr, itoa(' ', direntry.org_size, buf, 9));
-      strcat (outstr, itoa(' ',(long) size_factor, buf, 5));
+      strcpy (outstr, itoan(' ', direntry.org_size, buf, 9));
+      strcat (outstr, itoan(' ',(long) size_factor, buf, 5));
       strcat (outstr, "% ");
-      strcat (outstr, itoa(' ',direntry.size_now, buf, 9));
+      strcat (outstr, itoan(' ',direntry.size_now, buf, 9));
       strcat (outstr, "  ");
-      strcat (outstr, itoa(' ',(long) day, buf, 3));
+      strcat (outstr, itoan(' ',(long) day, buf, 3));
       strcat (outstr, " ");
       strncat (outstr, &month_list[month*3], 3);
       strcat (outstr, " ");
       if (day && month)
-         strcat (outstr, itoa(' ',(long) (year+80) % 100, buf, 3));
+         strcat (outstr, itoan(' ',(long) (year+80) % 100, buf, 3));
       else
-         strcat (outstr, itoa(' ',0L, buf, 3));
+         strcat (outstr, itoan(' ',0L, buf, 3));
       strcat (outstr, " ");
-      strcat (outstr, itoa('0',(long) hours, buf, 3));
+      strcat (outstr, itoan('0',(long) hours, buf, 3));
       strcat (outstr, ":");
-      strcat (outstr, itoa('0',(long) min, buf, 3));
+      strcat (outstr, itoan('0',(long) min, buf, 3));
       strcat (outstr, ":");
-      strcat (outstr, itoa('0',(long) sec, buf, 3));
+      strcat (outstr, itoan('0',(long) sec, buf, 3));
       strcat (outstr, "  ");
       strcat (outstr, direntry.fname);
       strcat (outstr, "\n");
@@ -245,8 +242,7 @@ char legal[]="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.";
 
 char *strchr ();
 
-int fixfname (fname)
-char *fname;
+int fixfname (char *fname)
 {
    char *p;
    for (p = fname;  *p != '\0';  p++) {

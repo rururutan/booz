@@ -1,6 +1,13 @@
 /* booz.h */
 /* this file is public domain */
 
+#include <stdio.h>
+
+typedef unsigned char uchar;    /* 8 bits or more */
+typedef unsigned int   uint;    /* 16 bits or more */
+typedef unsigned short ushort;  /* 16 bits or more */
+typedef unsigned long  ulong;   /* 32 bits or more */
+
 /* T_UINT16 must be an unsigned data type of exactly 16 bits */
 #define T_UINT16     unsigned short
 
@@ -33,22 +40,26 @@ binary mode (not involving any newline translation).
 #define MEM_BLOCK_SIZE	8192
 
 /* Functions defined by Booz */
+struct zoo_header;
+struct direntry;
 
-int getfile ();
-int lzd ();
-int readdir ();
-int rd_zooh ();
-int rd_dir ();
-int addbfcrc();
-int prterror();
-int oozext ();
-int putstr ();
-char *itoa ();
-int fixfname ();
-
-/* Standard functions */
-
-char *malloc();
-char *strcpy();
-char *strcat();
-char *strncat();
+int getfile (FILE*, FILE*, long);
+int lzd (FILE*, FILE*);
+int rd_zooh (struct zoo_header*, FILE*);
+int rd_dir (struct direntry*, FILE*);
+int addbfcrc (char *buffer, unsigned);
+int prterror (int, char*, char*, char*);
+int oozext (char*, char*, int, char *argv[]);
+void putstr (char*);
+char *itoan (char, long, char*, int);
+int fixfname (char*);
+int memerr ();
+int gentab ();
+int match (char*, char*);
+int cfactor (long, long);
+int lzh_decode (FILE*, FILE*);
+int fillbuf (int);
+int make_table (int, uchar[], int, ushort[]);
+int init_getbits();
+int huf_decode_start();
+int fwrite_crc (uchar *, int, FILE*);
